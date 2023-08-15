@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">nbCamp_AndroidBasicPractices</string>
+    <string name="signin_intent">userid</string>
 </resources>
