@@ -68,6 +68,7 @@
         android:hint="비밀번호"
         android:padding="10dp"
         android:textColor="@color/white"
+        android:inputType="textPassword"
         android:textColorHint="@color/lightGray"
         app:layout_constraintBottom_toTopOf="@+id/signin_btn_signin"
         app:layout_constraintEnd_toEndOf="parent"
