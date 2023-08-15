@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import bootcamp.sparta.nbcamp_androidbasicpractices.R
 import bootcamp.sparta.nbcamp_androidbasicpractices.main.MainPageActivity
@@ -40,6 +41,26 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun textWatcherListener() {
+        IdTextChangedListener()
+        PwTextChangedListener()
+    }
+
+    private fun IdTextChangedListener() {
+        et_id.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                isRegularId()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
+    }
+
+    private fun PwTextChangedListener() {
         et_pw.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -54,9 +75,23 @@ class SignInActivity : AppCompatActivity() {
         })
     }
 
-    private fun isRegularPassword() : Boolean {
+    private fun isRegularId() : Boolean {
+        val id = et_id.text.trim()
+        val idPattern = "^[a-zA-Z0-9]{5,10}$" // 영어(대소문자), 숫자 5~10글자 정규식
+        val pattern = Pattern.matches(idPattern, id)
+        if (pattern) {
+            et_id.background = getDrawable(R.drawable.edittext_shape_white)
+            return true
+        } else {
+            et_id.background = getDrawable(R.drawable.edittext_shape_red)
+            return false
+        }
+    }
+
+
+        private fun isRegularPassword() : Boolean {
         val pw = et_pw.text.trim()
-        val pwPattern = "^.*(?=^.{8,15}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$"
+        val pwPattern = "^.*(?=^.{8,15}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$" // 영어대소문자, 숫자, 특수문자가 포함된 8~15글자
         val pattern = Pattern.matches(pwPattern, pw)
         if(pattern) {
             Log.d("SignInActivity", "정답!")
@@ -77,9 +112,19 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signin() {
         btn_signin.setOnClickListener {
-            val intent = Intent(this, MainPageActivity::class.java)
-            intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
-            setResult(RESULT_OK, intent)
+            if(isRegularPassword() && isRegularId()) {
+                val intent = Intent(this, MainPageActivity::class.java)
+                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
+                setResult(RESULT_OK, intent)
+            } else {
+                if(!isRegularPassword()) {
+                    Toast.makeText(this, getString(R.string.pw_error_toast_msg), Toast.LENGTH_SHORT).show()
+                }
+
+                if(!isRegularId()) {
+                    Toast.makeText(this, getString(R.string.id_error_toast_msg), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
