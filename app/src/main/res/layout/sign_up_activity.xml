@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@id/signup_tv_phone" />
 
     <TextView
-        android:id="@+id/signup_tv_job"
+        android:id="@+id/signup_tv_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signup_et_phone" />
 
     <EditText
-        android:id="@+id/signup_et_job"
+        android:id="@+id/signup_et_position"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -94,7 +94,7 @@
         android:textColorHint="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_tv_job" />
+        app:layout_constraintTop_toBottomOf="@id/signup_tv_position" />
 
     <TextView
         android:id="@+id/signup_tv_id"
@@ -103,7 +103,7 @@
         android:layout_marginStart="15dp"
         android:text="아이디"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_et_job" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_et_position" />
 
 
     <EditText
