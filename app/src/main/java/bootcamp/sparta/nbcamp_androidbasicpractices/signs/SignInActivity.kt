@@ -14,22 +14,24 @@ import bootcamp.sparta.nbcamp_androidbasicpractices.Commons.isRegexId
 import bootcamp.sparta.nbcamp_androidbasicpractices.Commons.isRegexPw
 import bootcamp.sparta.nbcamp_androidbasicpractices.R
 import bootcamp.sparta.nbcamp_androidbasicpractices.data.UserData
+import bootcamp.sparta.nbcamp_androidbasicpractices.data.UserData.validationIdAndPw
 import bootcamp.sparta.nbcamp_androidbasicpractices.main.MainPageActivity
 import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity() {
-    private val et_id : EditText by lazy {
+    private val et_id: EditText by lazy {
         findViewById(R.id.signin_et_id)
     }
-    private val et_pw : EditText by lazy {
+    private val et_pw: EditText by lazy {
         findViewById(R.id.signin_et_pw)
     }
-    private val btn_signin : Button by lazy {
+    private val btn_signin: Button by lazy {
         findViewById(R.id.signin_btn_signin)
     }
-    private val btn_signup : Button by lazy {
+    private val btn_signup: Button by lazy {
         findViewById(R.id.signin_btn_signup)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in_activity)
@@ -49,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun IdTextChangedListener() {
-        et_id.addTextChangedListener(object : TextWatcher{
+        et_id.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -64,7 +66,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun PwTextChangedListener() {
-        et_pw.addTextChangedListener(object: TextWatcher{
+        et_pw.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -88,8 +90,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-        private fun isRegularPassword() {
-        if(isRegexPw(et_pw.text)) {
+    private fun isRegularPassword() {
+        if (isRegexPw(et_pw.text)) {
             et_pw.background = getDrawable(R.drawable.edittext_shape_white)
         } else {
             et_pw.error = getString(R.string.pw_error_et_msg)
@@ -108,22 +110,31 @@ class SignInActivity : AppCompatActivity() {
         btn_signin.setOnClickListener {
             val isCheckedId = isRegexId(et_id.text)
             val isCheckedPw = isRegexPw(et_pw.text)
-            if(isCheckedId && isCheckedPw) {
-                val intent = Intent(this, MainPageActivity::class.java)
-                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
-                setResult(RESULT_OK, intent)
-            } else {
-                if(!isCheckedId) {
-                    Toast.makeText(this, getString(R.string.id_error_toast_msg), Toast.LENGTH_SHORT).show()
+            if (isCheckedId && isCheckedPw) {
+                // id, pw 유효성검증(회원목록에 있는지 체크 후 없을경우 회원가입페이지로 유도)
+                val result = validationIdAndPw(
+                    this,
+                    et_id,
+                    et_pw
+                )
+
+                if (result) {
+//                val intent = Intent(this, MainPageActivity::class.java)
+//                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
+//                setResult(RESULT_OK, intent)
                 }
 
-                if(!isCheckedPw) {
-                    Toast.makeText(this, getString(R.string.pw_error_toast_msg), Toast.LENGTH_SHORT).show()
+            } else {
+                if (!isCheckedId) {
+                    Toast.makeText(this, getString(R.string.id_error_toast_msg), Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                if (!isCheckedPw) {
+                    Toast.makeText(this, getString(R.string.pw_error_toast_msg), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
-    }
-
-    private fun checkValidIdAndPassword() {
     }
 }

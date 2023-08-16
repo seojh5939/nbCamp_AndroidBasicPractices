@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.text.Editable
 import java.util.regex.Pattern
 
+// 정규식 관련 정의
 private const val REGEX_ONLY_ALPHABAT = "^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$"
 private const val REGEX_ONLY_NUMBER = "^[0-9]{10,11}"
 private const val REGEX_ID = "^[a-zA-Z0-9]{5,10}$" // 영어(대소문자), 숫자 5~10글자 정규식
@@ -33,13 +34,13 @@ fun isRegexNumber(text: Editable): Boolean {
     return Pattern.matches(REGEX_ONLY_NUMBER, data)
 }
 
-fun popupDialog(context: Context, title: String, msg: String, done: () -> Unit, ) {
+// 다용도 AlertDialog
+fun popupDialog(context: Context, title: String, msg: String, done: (DialogInterface, Int) -> Unit) {
     val builder = AlertDialog.Builder(context)
     builder.setTitle(title)
         .setMessage(msg)
         .setCancelable(false)
-        .setPositiveButton("확인") { dialog, which -> done }
-//        .setPositiveButton("확인") { dialog, which -> (context as Activity).finish() }
+        .setPositiveButton("확인", done)
         .setNegativeButton("취소") { dialog, which -> dialog.cancel() }
         .create()
         .show()

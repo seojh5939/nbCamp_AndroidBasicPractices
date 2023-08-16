@@ -39,6 +39,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
 
+    // 실시간 EditText 입력감지 및 예외처리
     private fun textWatcherListener() {
         nameTextChangedListener()
         phoneTextChangedListener()
@@ -156,6 +157,7 @@ class SignUpActivity : AppCompatActivity() {
         imageOnClickListener()
     }
 
+    // 랜덤이미지 뷰 처리
     private fun imageOnClickListener() {
         val list : List<Drawable?> = listOf(
             getDrawable(R.drawable.logo1),
@@ -176,7 +178,7 @@ class SignUpActivity : AppCompatActivity() {
             val isNotEmpty =
                 et_name.text.isNotEmpty() || et_phone.text.isNotEmpty() || et_position.text.isNotEmpty() || et_id.text.isNotEmpty() || et_pw.text.isNotEmpty()
             if (isNotEmpty) {
-                popupDialog(this, "취소하기", "작성하시던 내용이 삭제됩니다.\n정말로 나가시겠습니까?") { finish() }
+                popupDialog(this, "취소하기", "작성하시던 내용이 삭제됩니다.\n정말로 나가시겠습니까?") { dialog, which -> finish() }
             } else {
                 finish()
             }
@@ -185,9 +187,11 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun doneOnClickListener() {
         btn_done.setOnClickListener {
+            // 회원가입과정에서 id가 존재하는경우
             if (UserData.isExistUser(et_id.text.toString())) {
-                popupDialog(this, "id 중복", "${et_id.text}은 사용할 수 없는 id입니다.") { finish() }
+                popupDialog(this, "id 중복", "${et_id.text}은 사용할 수 없는 id입니다.") { dialog, which -> finish() }
             } else {
+                // 존재하지않을경우 UserList에 User정보 저장.
                 UserData.addUser(
                     User(
                         id = et_id.text.toString(),
