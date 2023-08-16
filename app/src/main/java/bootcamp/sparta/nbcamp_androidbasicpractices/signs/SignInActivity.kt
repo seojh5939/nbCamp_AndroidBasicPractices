@@ -10,23 +10,28 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import bootcamp.sparta.nbcamp_androidbasicpractices.Commons.isRegexId
+import bootcamp.sparta.nbcamp_androidbasicpractices.Commons.isRegexPw
 import bootcamp.sparta.nbcamp_androidbasicpractices.R
+import bootcamp.sparta.nbcamp_androidbasicpractices.data.UserData
+import bootcamp.sparta.nbcamp_androidbasicpractices.data.UserData.validationIdAndPw
 import bootcamp.sparta.nbcamp_androidbasicpractices.main.MainPageActivity
 import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity() {
-    private val et_id : EditText by lazy {
+    private val et_id: EditText by lazy {
         findViewById(R.id.signin_et_id)
     }
-    private val et_pw : EditText by lazy {
+    private val et_pw: EditText by lazy {
         findViewById(R.id.signin_et_pw)
     }
-    private val btn_signin : Button by lazy {
+    private val btn_signin: Button by lazy {
         findViewById(R.id.signin_btn_signin)
     }
-    private val btn_signup : Button by lazy {
+    private val btn_signup: Button by lazy {
         findViewById(R.id.signin_btn_signup)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in_activity)
@@ -46,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun IdTextChangedListener() {
-        et_id.addTextChangedListener(object : TextWatcher{
+        et_id.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -61,7 +66,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun PwTextChangedListener() {
-        et_pw.addTextChangedListener(object: TextWatcher{
+        et_pw.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -75,31 +80,22 @@ class SignInActivity : AppCompatActivity() {
         })
     }
 
-    private fun isRegularId() : Boolean {
-        val id = et_id.text.trim()
-        val idPattern = "^[a-zA-Z0-9]{5,10}$" // 영어(대소문자), 숫자 5~10글자 정규식
-        val pattern = Pattern.matches(idPattern, id)
-        if (pattern) {
+    private fun isRegularId() {
+        if (isRegexId(et_id.text)) {
             et_id.background = getDrawable(R.drawable.edittext_shape_white)
-            return true
         } else {
+            et_id.error = getString(R.string.id_error_et_msg)
             et_id.background = getDrawable(R.drawable.edittext_shape_red)
-            return false
         }
     }
 
 
-        private fun isRegularPassword() : Boolean {
-        val pw = et_pw.text.trim()
-        val pwPattern = "^.*(?=^.{8,15}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$" // 영어대소문자, 숫자, 특수문자가 포함된 8~15글자
-        val pattern = Pattern.matches(pwPattern, pw)
-        if(pattern) {
-            Log.d("SignInActivity", "정답!")
+    private fun isRegularPassword() {
+        if (isRegexPw(et_pw.text)) {
             et_pw.background = getDrawable(R.drawable.edittext_shape_white)
-            return true
         } else {
+            et_pw.error = getString(R.string.pw_error_et_msg)
             et_pw.background = getDrawable(R.drawable.edittext_shape_red)
-            return false
         }
     }
 
@@ -112,17 +108,31 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signin() {
         btn_signin.setOnClickListener {
-            if(isRegularPassword() && isRegularId()) {
-                val intent = Intent(this, MainPageActivity::class.java)
-                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
-                setResult(RESULT_OK, intent)
-            } else {
-                if(!isRegularPassword()) {
-                    Toast.makeText(this, getString(R.string.pw_error_toast_msg), Toast.LENGTH_SHORT).show()
+            val isCheckedId = isRegexId(et_id.text)
+            val isCheckedPw = isRegexPw(et_pw.text)
+            if (isCheckedId && isCheckedPw) {
+                // id, pw 유효성검증(회원목록에 있는지 체크 후 없을경우 회원가입페이지로 유도)
+                val result = validationIdAndPw(
+                    this,
+                    et_id,
+                    et_pw
+                )
+
+                if (result) {
+//                val intent = Intent(this, MainPageActivity::class.java)
+//                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
+//                setResult(RESULT_OK, intent)
                 }
 
-                if(!isRegularId()) {
-                    Toast.makeText(this, getString(R.string.id_error_toast_msg), Toast.LENGTH_SHORT).show()
+            } else {
+                if (!isCheckedId) {
+                    Toast.makeText(this, getString(R.string.id_error_toast_msg), Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                if (!isCheckedPw) {
+                    Toast.makeText(this, getString(R.string.pw_error_toast_msg), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

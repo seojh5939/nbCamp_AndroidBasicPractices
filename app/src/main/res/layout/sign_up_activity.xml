@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_tv_title"
-        tools:src="@color/black" />
+        android:src="@drawable/logo1" />
 
     <TextView
         android:id="@+id/signup_tv_name"
@@ -44,7 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/lightGray"
         android:hint="이름"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionNext"
         android:textColorHint="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,14 +70,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/lightGray"
         android:hint="전화번호"
+        android:inputType="number"
+        android:maxLines="1"
         android:textColorHint="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup_tv_phone" />
 
     <TextView
-        android:id="@+id/signup_tv_job"
+        android:id="@+id/signup_tv_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -82,16 +89,20 @@
         app:layout_constraintTop_toBottomOf="@+id/signup_et_phone" />
 
     <EditText
-        android:id="@+id/signup_et_job"
+        android:id="@+id/signup_et_position"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/lightGray"
         android:hint="직책"
         android:textColorHint="@color/lightGray"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_tv_job" />
+        app:layout_constraintTop_toBottomOf="@id/signup_tv_position" />
 
     <TextView
         android:id="@+id/signup_tv_id"
@@ -100,7 +111,7 @@
         android:layout_marginStart="15dp"
         android:text="아이디"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_et_job" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_et_position" />
 
 
     <EditText
@@ -109,7 +120,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/lightGray"
         android:hint="아이디"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionNext"
         android:textColorHint="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +145,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/lightGray"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         android:hint="비밀번호"
         android:textColorHint="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
