@@ -3,7 +3,6 @@ package bootcamp.sparta.nbcamp_androidbasicpractices.data
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import bootcamp.sparta.nbcamp_androidbasicpractices.Commons.popupDialog
@@ -20,13 +19,13 @@ object UserData {
     // 동일한 userid가 존재하는지 체크.
     // true: 존재, false: 존재하지않음.
     fun isExistUser(userid: String): Boolean {
-        return userList.filter { it.id == userid }.isNotEmpty()
+        return userList.filter { it.userid == userid }.isNotEmpty()
     }
 
     // 내부적으로 id, pw 검증작업을 진행함.
     // true: userid, pw 모두 일치, false: pw 틀림.
     fun validate(userid: String, password: String): Boolean {
-        val validate = userList.find { it.id == userid }?.let { it.pw == password }
+        val validate = userList.find { it.userid == userid }?.let { it.password == password }
         return validate == true
     }
 
@@ -57,7 +56,7 @@ object UserData {
     // userid를 검사하여 user가 존재하지 않을경우에만 List에 추가.
     // 다른곳에서도 검증 후에 add하지만 혹시몰라 추가검증.
     fun addUser(user: User) {
-        if(!isExistUser(user.id)) {
+        if(!isExistUser(user.userid)) {
             userList.add(user)
         }
     }
