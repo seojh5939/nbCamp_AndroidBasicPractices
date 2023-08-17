@@ -1,6 +1,5 @@
 package bootcamp.sparta.nbcamp_androidbasicpractices.signs
 
-import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -194,8 +193,8 @@ class SignUpActivity : AppCompatActivity() {
                 // 존재하지않을경우 UserList에 User정보 저장.
                 UserData.addUser(
                     User(
-                        id = et_id.text.toString(),
-                        pw = et_pw.text.toString(),
+                        userid = et_id.text.toString(),
+                        password = et_pw.text.toString(),
                         phone = et_phone.text.toString().toInt(),
                         name = et_name.text.toString(),
                         position = et_position.text.toString(),
