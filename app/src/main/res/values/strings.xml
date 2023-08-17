@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">nbCamp_AndroidBasicPractices</string>
+    <string name="signin_intent">userid</string>
+    <string name="pw_error_toast_msg">비밀번호는 영어, 숫자, 특수문자를 포함하여 8~16글자여야 합니다.</string>
+    <string name="id_error_toast_msg">아이디는 영어 숫자를 포함한 5~10글자여야 합니다.</string>
+    <string name="id_error_et_msg">5~10자의 영어(대소문자)와 숫자만 입력하세요.</string>
+    <string name="pw_error_et_msg">8~15자의 영어(대소문자), 숫자, 특수문자를 포함하세요.</string>
+    <string name="phone_error_et_msg">10~11자의 숫자만 입력하세요.</string>
+    <string name="name_error_et_msg">한글 또는 영어만 입력하세요.</string>
+</resources>
