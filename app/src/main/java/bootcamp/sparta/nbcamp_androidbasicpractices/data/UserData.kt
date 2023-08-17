@@ -61,4 +61,6 @@ object UserData {
             userList.add(user)
         }
     }
+
+    fun getUserList() = userList
 }

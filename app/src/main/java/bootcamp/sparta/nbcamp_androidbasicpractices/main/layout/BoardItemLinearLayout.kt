@@ -1,4 +1,4 @@
-package bootcamp.sparta.nbcamp_androidbasicpractices.main
+package bootcamp.sparta.nbcamp_androidbasicpractices.main.layout
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import bootcamp.sparta.nbcamp_androidbasicpractices.R
+import bootcamp.sparta.nbcamp_androidbasicpractices.data.model.Board
 
 // 동적 Layout생성을위한 model class
 class BoardItemLinearLayout(context: Context) : LinearLayout(context) {
@@ -20,10 +21,10 @@ class BoardItemLinearLayout(context: Context) : LinearLayout(context) {
         boardItemView = LayoutInflater.from(context).inflate(R.layout.board_title_item, this, true)
     }
 
-    fun bindViewAndValues(image: Int, name: String, dttm: String, title: String) {
-        item_image.setImageResource(image)
-        item_name.text = name
-        item_dttm.text = dttm
-        item_title.text = title
+    fun bindViewAndValues(board: Board) {
+        item_image.setImageResource(board.image)
+        item_name.text = board.name
+        item_dttm.text = board.dttm
+        item_title.text = board.title
     }
 }
