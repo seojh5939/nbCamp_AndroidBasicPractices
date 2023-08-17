@@ -6,13 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".main.MainPageActivity">
 
+    <ImageView
+        android:id="@+id/main_iv_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/main_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginStart="5dp"
+        android:text="이름: "
+        app:layout_constraintBottom_toTopOf="@+id/main_tv_position"
+        app:layout_constraintStart_toEndOf="@+id/main_iv_image"
+        app:layout_constraintTop_toTopOf="@id/main_iv_image" />
+
+    <TextView
+        android:id="@+id/main_tv_name_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/main_tv_name"
+        app:layout_constraintStart_toEndOf="@+id/main_tv_name"
+        app:layout_constraintTop_toTopOf="@+id/main_tv_name"
+        tools:text="정나미" />
+
+    <TextView
+        android:id="@+id/main_tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="직책: "
+        app:layout_constraintBottom_toBottomOf="@+id/main_iv_image"
+        app:layout_constraintStart_toEndOf="@+id/main_iv_image"
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_name" />
+
+    <TextView
+        android:id="@+id/main_tv_position_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/main_tv_position"
+        app:layout_constraintStart_toEndOf="@+id/main_tv_position"
+        app:layout_constraintTop_toTopOf="@+id/main_tv_position"
+        tools:text="팀장" />
+
+    <ImageButton
+        android:id="@+id/main_ib_mypage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/white"
+        android:src="@drawable/mypage_icon"
+        app:layout_constraintBottom_toBottomOf="@id/main_iv_image"
+        app:layout_constraintEnd_toStartOf="@+id/main_ib_write"
+        app:layout_constraintTop_toTopOf="@+id/main_iv_image" />
+
+    <ImageButton
+        android:id="@+id/main_ib_write"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/white"
+        android:src="@drawable/edit_icon"
+        app:layout_constraintBottom_toBottomOf="@id/main_iv_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/main_iv_image" />
+
+    <TextView
+        android:id="@+id/main_tv_team_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="팀 맴버"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_iv_image" />
+
+    <HorizontalScrollView
+        android:id="@+id/main_member_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_team_title">
+
+        <LinearLayout
+            android:id="@+id/main_member_linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="70dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/main_tv_board_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="팀 게시판"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_member_scrollview" />
+
+    <LinearLayout
+        android:id="@+id/main_board_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_board_title">
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
