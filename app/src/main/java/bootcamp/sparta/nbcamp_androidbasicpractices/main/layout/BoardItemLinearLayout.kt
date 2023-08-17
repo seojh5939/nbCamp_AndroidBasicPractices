@@ -22,7 +22,7 @@ class BoardItemLinearLayout(context: Context) : LinearLayout(context) {
     }
 
     fun bindViewAndValues(board: Board) {
-        item_image.setImageResource(board.image)
+        item_image.setImageDrawable(board.image)
         item_name.text = board.name
         item_dttm.text = board.dttm
         item_title.text = board.title
