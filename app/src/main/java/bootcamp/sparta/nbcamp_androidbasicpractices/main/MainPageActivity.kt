@@ -6,11 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
-import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.marginBottom
 import bootcamp.sparta.nbcamp_androidbasicpractices.R
 import bootcamp.sparta.nbcamp_androidbasicpractices.data.BoardData
 import bootcamp.sparta.nbcamp_androidbasicpractices.data.UserData
@@ -28,9 +27,9 @@ class MainPageActivity : AppCompatActivity() {
     val iv_image: ImageView by lazy { findViewById(R.id.main_iv_image) }
     val tv_name: TextView by lazy { findViewById(R.id.main_tv_name_value) }
     val tv_position: TextView by lazy { findViewById(R.id.main_tv_position_value) }
+    val ib_myPage : ImageButton by lazy { findViewById(R.id.main_ib_mypage) }
+    val ib_write: ImageButton by lazy { findViewById(R.id.main_ib_write) }
 
-    // board_title_item
-//    lateinit var boardItemLayout : View
     lateinit var item_image: ImageView
     lateinit var item_name: TextView
     lateinit var item_dttm: TextView
@@ -50,11 +49,6 @@ class MainPageActivity : AppCompatActivity() {
         setValues()
 //        createBoards()
 //        createMembers()
-    }
-
-    // 게시판 item View Init
-    private fun setBoardItemViews() {
-
     }
 
     // 로그인한 user값 입력
@@ -86,12 +80,10 @@ class MainPageActivity : AppCompatActivity() {
             getDrawable(R.drawable.logo1),
             getDrawable(R.drawable.logo2),
             getDrawable(R.drawable.logo3),
-            getDrawable(R.drawable.logo4),
-            getDrawable(R.drawable.logo5),
         )
 
         tv_member.setOnClickListener {
-            val random = Random.nextInt(5)
+            val random = Random.nextInt(3)
             val user: User = User(
                 id = UserData.getUserList().size,
                 name = "정나미_$random",
@@ -142,7 +134,7 @@ class MainPageActivity : AppCompatActivity() {
     }
 
     // 게시판 item 값 입력
-    private fun bindViewAndValues(board: Board) {
+    private fun boardBindViewAndValues(board: Board) {
         item_image.setImageDrawable(board.image)
         item_name.text = board.name
         item_dttm.text = board.dttm
@@ -157,6 +149,9 @@ class MainPageActivity : AppCompatActivity() {
         item_name = boardItemLayout.findViewById(R.id.board_tv_name)
         item_dttm = boardItemLayout.findViewById(R.id.board_tv_dttm)
         item_title = boardItemLayout.findViewById(R.id.board_tv_title)
+        boardItemLayout.setOnClickListener {
+            // TODO 더보기 구현
+        }
 
         val layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -166,7 +161,7 @@ class MainPageActivity : AppCompatActivity() {
 
         boardLayout.removeView(boardItemLayout)
         boardLayout.addView(boardItemLayout, layoutParams)
-        bindViewAndValues(board)
+        boardBindViewAndValues(board)
     }
 
     private fun Int.toPx(context: Context) =

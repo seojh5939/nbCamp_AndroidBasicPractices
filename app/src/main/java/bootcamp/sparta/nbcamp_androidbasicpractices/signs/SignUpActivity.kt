@@ -162,10 +162,7 @@ class SignUpActivity : AppCompatActivity() {
             getDrawable(R.drawable.logo1),
             getDrawable(R.drawable.logo2),
             getDrawable(R.drawable.logo3),
-            getDrawable(R.drawable.logo4),
-            getDrawable(R.drawable.logo5),
         )
-
         iv_iamge.setOnClickListener {
             val random = Random.nextInt(5)
             iv_iamge.setImageDrawable(list[random])
