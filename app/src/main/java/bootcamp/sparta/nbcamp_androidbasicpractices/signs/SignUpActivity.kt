@@ -1,6 +1,5 @@
 package bootcamp.sparta.nbcamp_androidbasicpractices.signs
 
-import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -163,10 +162,7 @@ class SignUpActivity : AppCompatActivity() {
             getDrawable(R.drawable.logo1),
             getDrawable(R.drawable.logo2),
             getDrawable(R.drawable.logo3),
-            getDrawable(R.drawable.logo4),
-            getDrawable(R.drawable.logo5),
         )
-
         iv_iamge.setOnClickListener {
             val random = Random.nextInt(5)
             iv_iamge.setImageDrawable(list[random])
@@ -194,8 +190,8 @@ class SignUpActivity : AppCompatActivity() {
                 // 존재하지않을경우 UserList에 User정보 저장.
                 UserData.addUser(
                     User(
-                        id = et_id.text.toString(),
-                        pw = et_pw.text.toString(),
+                        userid = et_id.text.toString(),
+                        password = et_pw.text.toString(),
                         phone = et_phone.text.toString().toInt(),
                         name = et_name.text.toString(),
                         position = et_position.text.toString(),

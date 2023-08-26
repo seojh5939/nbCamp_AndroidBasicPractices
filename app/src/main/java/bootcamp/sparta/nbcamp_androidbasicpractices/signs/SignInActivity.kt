@@ -119,9 +119,9 @@ class SignInActivity : AppCompatActivity() {
                 )
 
                 if (result) {
-//                val intent = Intent(this, MainPageActivity::class.java)
-//                intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
-//                setResult(RESULT_OK, intent)
+                    val intent = Intent(this, MainPageActivity::class.java)
+                    intent.putExtra(getString(R.string.signin_intent), et_id.text.toString())
+                    startActivity(intent)
                 }
 
             } else {
